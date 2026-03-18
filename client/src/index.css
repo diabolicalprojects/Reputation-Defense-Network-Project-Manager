@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-surface-700;
+  }
+  body {
+    @apply bg-surface-950 text-surface-100 font-sans antialiased;
+  }
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-500;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg font-medium
+           transition-all duration-200 shadow-lg shadow-brand-600/20 hover:shadow-brand-500/30
+           active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed text-sm;
+  }
+  .btn-secondary {
+    @apply px-4 py-2 bg-surface-700 hover:bg-surface-600 text-surface-200 rounded-lg font-medium
+           transition-all duration-200 active:scale-[0.98] text-sm;
+  }
+  .btn-danger {
+    @apply px-4 py-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-lg font-medium
+           transition-all duration-200 active:scale-[0.98] text-sm;
+  }
+  .btn-ghost {
+    @apply px-3 py-1.5 hover:bg-surface-700/50 text-surface-400 hover:text-surface-200 rounded-lg
+           transition-all duration-200 text-sm;
+  }
+  .card {
+    @apply bg-surface-800/50 backdrop-blur-sm border border-surface-700/50 rounded-xl p-4
+           shadow-xl shadow-black/10;
+  }
+  .card-hover {
+    @apply card hover:border-surface-600/50 hover:shadow-2xl hover:shadow-black/20
+           transition-all duration-300 cursor-pointer;
+  }
+  .input-field {
+    @apply w-full px-3 py-2 bg-surface-800 border border-surface-600 rounded-lg text-surface-100
+           placeholder-surface-500 focus:outline-none focus:ring-2 focus:ring-brand-500/50
+           focus:border-brand-500 transition-all duration-200 text-sm;
+  }
+  .label-text {
+    @apply block text-xs font-medium text-surface-400 mb-1 uppercase tracking-wider;
+  }
+  .badge {
+    @apply px-2 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
+  }
+  .badge-new {
+    @apply badge bg-surface-700 text-surface-300;
+  }
+  .badge-design {
+    @apply badge bg-violet-500/20 text-violet-300;
+  }
+  .badge-design-review {
+    @apply badge bg-amber-500/20 text-amber-300;
+  }
+  .badge-development {
+    @apply badge bg-cyan-500/20 text-cyan-300;
+  }
+  .badge-internal-review {
+    @apply badge bg-orange-500/20 text-orange-300;
+  }
+  .badge-completed {
+    @apply badge bg-emerald-500/20 text-emerald-300;
+  }
+}
