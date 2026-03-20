@@ -5,18 +5,25 @@ import Modal from '../components/Modal';
 import StatusBadge from '../components/StatusBadge';
 import api from '../lib/api';
 import type { Project } from '../lib/types';
+import { useAuth } from '../context/AuthContext';
 import { Code2, ExternalLink, Eye, EyeOff, Send, Loader2, Inbox, CheckCircle2, Circle, Copy, Check, FileText } from 'lucide-react';
 import { useProjectMutations } from '../hooks/useProjectMutations';
 import { copyToClipboard, getWpAdminUrl } from '../lib/utils';
 
 const DashboardDeveloper: React.FC = () => {
+  const { user } = useAuth();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
-  const { data: projects = [], isLoading } = useQuery<Project[]>({
+  const { data: allProjects = [], isLoading } = useQuery<Project[]>({
     queryKey: ['my-projects'],
     queryFn: () => api.get('/projects/mine').then((r) => r.data),
+  });
+
+  const projects = allProjects.filter((p: Project) => {
+    const developerId = typeof p.developerId === 'object' ? p.developerId?._id : p.developerId;
+    return developerId === user?.id;
   });
 
   const { sopMutation, statusMutation } = useProjectMutations();

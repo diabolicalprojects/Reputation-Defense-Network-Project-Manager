@@ -12,7 +12,7 @@ export const getAllProjects = async (req: AuthRequest, res: Response): Promise<v
     const { role, userId } = req.user!;
     
     let query = {};
-    if (role === 'PM' || role === 'BOTH') {
+    if (role === 'PM') {
       query = { pmId: userId };
     } else {
       query = { $or: [{ designerId: userId }, { developerId: userId }] };
@@ -42,12 +42,19 @@ export const getProjectById = async (req: AuthRequest, res: Response): Promise<v
       return;
     }
 
-    // Role-based security (optional but good)
+    // Role-based security
     const { role, userId } = req.user!;
-    if (role === 'PM' || role === 'BOTH') {
+    if (role === 'PM') {
       if (project.pmId.toString() !== userId) {
         res.status(403).json({ message: 'Not authorized for this project' });
         return;
+      }
+    } else {
+      const isDesigner = project.designerId?.toString() === userId;
+      const isDeveloper = project.developerId?.toString() === userId;
+      if (!isDesigner && !isDeveloper) {
+         res.status(403).json({ message: 'Not authorized for this project' });
+         return;
       }
     }
 
@@ -101,7 +108,7 @@ export const updateProject = async (req: AuthRequest, res: Response): Promise<vo
     }
 
     // Role-based restrictions
-    if (role !== 'PM' && role !== 'BOTH') {
+    if (role !== 'PM') {
       const isDesigner = project.designerId?.toString() === userId;
       const isDeveloper = project.developerId?.toString() === userId;
 
@@ -111,9 +118,11 @@ export const updateProject = async (req: AuthRequest, res: Response): Promise<vo
       }
 
       const updateData: any = {};
-      if (role === 'DESIGNER' && !isDeveloper) {
+      if (isDesigner) {
         if (req.body.assets?.figmaLink !== undefined) updateData['assets.figmaLink'] = req.body.assets.figmaLink;
-      } else if (role === 'DEVELOPER' || isDeveloper) {
+      }
+      
+      if (isDeveloper) {
         const { assets, developmentData } = req.body;
         if (assets?.figmaLink !== undefined) updateData['assets.figmaLink'] = assets.figmaLink;
         if (developmentData?.domainUrl !== undefined) updateData['developmentData.domainUrl'] = developmentData.domainUrl;
@@ -165,7 +174,7 @@ export const updateProjectStatus = async (req: AuthRequest, res: Response): Prom
     }
 
     // Role-based ownership check
-    if (role === 'PM' || (role === 'BOTH' && project.pmId.toString() === userId)) {
+    if (role === 'PM') {
       if (project.pmId.toString() !== userId) {
         res.status(403).json({ message: 'Not authorized for this project' });
         return;

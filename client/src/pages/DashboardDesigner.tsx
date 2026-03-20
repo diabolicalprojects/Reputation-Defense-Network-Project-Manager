@@ -5,16 +5,23 @@ import Modal from '../components/Modal';
 import StatusBadge from '../components/StatusBadge';
 import api from '../lib/api';
 import type { Project } from '../lib/types';
+import { useAuth } from '../context/AuthContext';
 import { Palette, ExternalLink, Send, Loader2, Inbox, FileText, CheckCircle2, Circle } from 'lucide-react';
 import { useProjectMutations } from '../hooks/useProjectMutations';
 
 const DashboardDesigner: React.FC = () => {
+  const { user } = useAuth();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [figmaLink, setFigmaLink] = useState('');
 
-  const { data: projects = [], isLoading } = useQuery<Project[]>({
+  const { data: allProjects = [], isLoading } = useQuery<Project[]>({
     queryKey: ['my-projects'],
     queryFn: () => api.get('/projects/mine').then((r) => r.data),
+  });
+
+  const projects = allProjects.filter((p: Project) => {
+    const designerId = typeof p.designerId === 'object' ? p.designerId?._id : p.designerId;
+    return designerId === user?.id;
   });
 
   const { updateMutation, statusMutation, sopMutation } = useProjectMutations();
