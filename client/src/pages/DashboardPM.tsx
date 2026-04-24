@@ -76,8 +76,8 @@ const DashboardPM: React.FC = () => {
       title="Project Pipeline"
       subtitle={`${projects.length} active projects`}
       actions={
-        <button onClick={() => setShowNewProject(true)} className="btn-primary flex items-center gap-2">
-          <Plus className="w-4 h-4" /> New Project
+        <button onClick={() => setShowNewProject(true)} className="btn-primary flex items-center gap-2 whitespace-nowrap">
+          <Plus className="w-4 h-4" /> <span className="hidden xs:inline">New Project</span><span className="xs:hidden">New</span>
         </button>
       }
     >

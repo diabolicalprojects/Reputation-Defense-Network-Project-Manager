@@ -85,7 +85,7 @@ export const ProjectDetailsView: React.FC<ProjectDetailsViewProps> = ({ project,
       </div>
 
       {/* Assignments */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label className="label-text">Designer</label>
           <select
@@ -115,7 +115,7 @@ export const ProjectDetailsView: React.FC<ProjectDetailsViewProps> = ({ project,
       </div>
 
       {/* Assets */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label className="label-text">Drive Link</label>
           <div className="flex gap-2">
@@ -169,7 +169,7 @@ export const ProjectDetailsView: React.FC<ProjectDetailsViewProps> = ({ project,
             )}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label className="label-text">Username</label>
             <div className="flex gap-2">
@@ -210,7 +210,7 @@ export const ProjectDetailsView: React.FC<ProjectDetailsViewProps> = ({ project,
       </div>
 
       {/* SOP Checklists */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Designer SOP */}
         <div className="p-3 bg-surface-900/50 rounded-xl border border-surface-700/30">
           <div className="flex items-center justify-between mb-3 px-1">

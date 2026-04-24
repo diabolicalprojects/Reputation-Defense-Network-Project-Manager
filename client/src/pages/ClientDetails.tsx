@@ -57,12 +57,12 @@ const ClientDetails: React.FC = () => {
       title={client.companyName}
       subtitle={client.contactName}
       actions={
-        <div className="flex gap-3">
-          <button onClick={() => navigate('/clients')} className="btn-secondary flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> Back
+        <div className="flex items-center gap-2 sm:gap-3">
+          <button onClick={() => navigate('/clients')} className="btn-secondary flex items-center gap-2 whitespace-nowrap">
+            <ArrowLeft className="w-4 h-4" /> <span className="hidden xs:inline">Back</span>
           </button>
-          <button onClick={() => setShowNewProject(true)} className="btn-primary flex items-center gap-2">
-            <Plus className="w-4 h-4" /> New Project
+          <button onClick={() => setShowNewProject(true)} className="btn-primary flex items-center gap-2 whitespace-nowrap">
+            <Plus className="w-4 h-4" /> <span className="hidden xs:inline">New Project</span><span className="xs:hidden">New</span>
           </button>
         </div>
       }
@@ -78,7 +78,7 @@ const ClientDetails: React.FC = () => {
             <p className="text-sm text-surface-400">{client.contactName}</p>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
           {client.email && (
             <div className="flex items-center gap-2 text-surface-400">
               <Mail className="w-4 h-4 text-surface-600" /> {client.email}

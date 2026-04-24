@@ -91,7 +91,7 @@ export const CreateProjectForm: React.FC<CreateProjectFormProps> = ({ clients, s
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 border-y border-surface-700/50 py-4 my-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-y border-surface-700/50 py-4 my-2">
         <div>
           <div className="flex items-center gap-2 mb-2 text-violet-400">
             <Palette className="w-3.5 h-3.5" />

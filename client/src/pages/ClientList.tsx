@@ -140,7 +140,7 @@ const ClientList: React.FC = () => {
             <label className="label-text">Contact Name</label>
             <input className="input-field" value={form.contactName} onChange={(e) => setForm({ ...form, contactName: e.target.value })} required />
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="label-text">Email</label>
               <input className="input-field" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
